@@ -32,8 +32,9 @@
       <IntrospectionStateNumber>890</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
-      <Relations>sequence|table|173219|173214|1
-sequence|table|173237|173222|1
+      <Relations>sequence|table|173347|173342|1
+sequence|table|173374|173369|1
+sequence|table|173393|173377|1
 </Relations>
     </database>
     <role id="7" parent="1" name="api">
@@ -151,8 +152,8 @@ sequence|table|173237|173222|1
       <Comment>standard public schema</Comment>
       <StateNumber>30434</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionTimestamp>2018-11-29.17:01:56.106</IntrospectionTimestamp>
-      <IntrospectionStateNumber>34650</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2018-12-03.13:48:14.729</IntrospectionTimestamp>
+      <IntrospectionStateNumber>34786</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -190,77 +191,78 @@ sequence|table|173237|173222|1
       <SchemaId>11</SchemaId>
     </extension>
     <sequence id="32" parent="25" name="customer_id_seq">
-      <ObjectId>173207</ObjectId>
+      <ObjectId>173374</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>34637</StateNumber>
+      <StateNumber>34781</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <CacheSize>1</CacheSize>
     </sequence>
     <sequence id="33" parent="25" name="transaction_type_id_seq">
-      <ObjectId>173219</ObjectId>
+      <ObjectId>173347</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>34645</StateNumber>
+      <StateNumber>34762</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <CacheSize>1</CacheSize>
     </sequence>
     <sequence id="34" parent="25" name="transactions_id_seq">
-      <ObjectId>173237</ObjectId>
+      <ObjectId>173393</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>34649</StateNumber>
+      <StateNumber>34785</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <CacheSize>1</CacheSize>
     </sequence>
     <table id="35" parent="25" name="customers">
-      <ObjectId>173209</ObjectId>
+      <ObjectId>173369</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>34648</StateNumber>
+      <StateNumber>34784</StateNumber>
     </table>
     <table id="36" parent="25" name="transaction_type">
-      <ObjectId>173214</ObjectId>
+      <ObjectId>173342</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>34648</StateNumber>
+      <StateNumber>34784</StateNumber>
     </table>
     <table id="37" parent="25" name="transactions">
-      <ObjectId>173222</ObjectId>
+      <ObjectId>173377</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>34648</StateNumber>
+      <StateNumber>34784</StateNumber>
     </table>
     <column id="38" parent="35" name="id">
       <Position>1</Position>
       <DataType>smallint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>34643</StateNumber>
+      <StateNumber>34782</StateNumber>
+      <DefaultExpression>nextval(&apos;customer_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>21</TypeId>
     </column>
     <column id="39" parent="35" name="first_name">
       <Position>2</Position>
       <DataType>varchar(60)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>34643</StateNumber>
+      <StateNumber>34780</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="40" parent="35" name="last_name">
       <Position>3</Position>
       <DataType>varchar(60)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>34643</StateNumber>
+      <StateNumber>34780</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="41" parent="35" name="company">
       <Position>4</Position>
       <DataType>varchar(60)|0s</DataType>
-      <StateNumber>34643</StateNumber>
+      <StateNumber>34780</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <index id="42" parent="35" name="customers_pkey">
-      <ObjectId>173212</ObjectId>
-      <StateNumber>34643</StateNumber>
+      <ObjectId>173372</ObjectId>
+      <StateNumber>34780</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
     <key id="43" parent="35" name="customers_pkey">
-      <ObjectId>173213</ObjectId>
-      <StateNumber>34643</StateNumber>
+      <ObjectId>173373</ObjectId>
+      <StateNumber>34780</StateNumber>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>customers_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
@@ -269,7 +271,7 @@ sequence|table|173237|173222|1
       <Position>1</Position>
       <DataType>smallint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>34646</StateNumber>
+      <StateNumber>34763</StateNumber>
       <DefaultExpression>nextval(&apos;transaction_type_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>21</TypeId>
     </column>
@@ -277,18 +279,18 @@ sequence|table|173237|173222|1
       <Position>2</Position>
       <DataType>varchar(60)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>34644</StateNumber>
+      <StateNumber>34761</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <index id="46" parent="36" name="transaction_type_pkey">
-      <ObjectId>173217</ObjectId>
-      <StateNumber>34644</StateNumber>
+      <ObjectId>173345</ObjectId>
+      <StateNumber>34761</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
     <key id="47" parent="36" name="transaction_type_pkey">
-      <ObjectId>173218</ObjectId>
-      <StateNumber>34644</StateNumber>
+      <ObjectId>173346</ObjectId>
+      <StateNumber>34761</StateNumber>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>transaction_type_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
@@ -297,7 +299,7 @@ sequence|table|173237|173222|1
       <Position>1</Position>
       <DataType>smallint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>34650</StateNumber>
+      <StateNumber>34786</StateNumber>
       <DefaultExpression>nextval(&apos;transactions_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>21</TypeId>
     </column>
@@ -305,54 +307,54 @@ sequence|table|173237|173222|1
       <Position>2</Position>
       <DataType>smallint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>34648</StateNumber>
+      <StateNumber>34784</StateNumber>
       <TypeId>21</TypeId>
     </column>
     <column id="50" parent="37" name="timestamp">
       <Position>3</Position>
-      <DataType>timestamp with time zone|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>34648</StateNumber>
-      <TypeId>1184</TypeId>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>34784</StateNumber>
+      <DefaultExpression>timezone(&apos;utc&apos;::text, now())</DefaultExpression>
+      <TypeId>1114</TypeId>
     </column>
     <column id="51" parent="37" name="type_code">
       <Position>4</Position>
       <DataType>smallint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>34648</StateNumber>
+      <StateNumber>34784</StateNumber>
       <TypeId>21</TypeId>
     </column>
     <column id="52" parent="37" name="name">
       <Position>5</Position>
       <DataType>varchar(60)|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>34648</StateNumber>
+      <StateNumber>34784</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="53" parent="37" name="amount">
       <Position>6</Position>
       <DataType>numeric(19,2 digit)|0s</DataType>
-      <StateNumber>34648</StateNumber>
+      <NotNull>1</NotNull>
+      <StateNumber>34784</StateNumber>
       <TypeId>1700</TypeId>
     </column>
     <index id="54" parent="37" name="transactions_pkey">
-      <ObjectId>173225</ObjectId>
-      <StateNumber>34648</StateNumber>
+      <ObjectId>173381</ObjectId>
+      <StateNumber>34784</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
     <key id="55" parent="37" name="transactions_pkey">
-      <ObjectId>173226</ObjectId>
-      <StateNumber>34648</StateNumber>
+      <ObjectId>173382</ObjectId>
+      <StateNumber>34784</StateNumber>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>transactions_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
     <foreign-key id="56" parent="37" name="transaction_to_customer_fkey">
-      <ObjectId>173227</ObjectId>
-      <StateNumber>34648</StateNumber>
+      <ObjectId>173383</ObjectId>
+      <StateNumber>34784</StateNumber>
       <ColNames>customer_id</ColNames>
-      <RefTableId>173209</RefTableId>
+      <RefTableId>173369</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>customers</RefTableName>
       <RefKeyName>customers_pkey</RefKeyName>
@@ -360,10 +362,10 @@ sequence|table|173237|173222|1
       <OnDelete>cascade</OnDelete>
     </foreign-key>
     <foreign-key id="57" parent="37" name="transaction_to_transaction_type_fkey">
-      <ObjectId>173232</ObjectId>
-      <StateNumber>34648</StateNumber>
+      <ObjectId>173388</ObjectId>
+      <StateNumber>34784</StateNumber>
       <ColNames>type_code</ColNames>
-      <RefTableId>173214</RefTableId>
+      <RefTableId>173342</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>transaction_type</RefTableName>
       <RefKeyName>transaction_type_pkey</RefKeyName>
