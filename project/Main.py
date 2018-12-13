@@ -1,20 +1,20 @@
-import datetime
-import decimal
-
+import dictionary
 from flask import Flask, jsonify, abort, make_response, request
-from sqlalchemy import create_engine, select
+from sqlalchemy import create_engine, select, inspect
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, joinedload, subqueryload
 from alchemyEncoder import AlchemyEncoder
-from flask_cors import CORS, cross_origin
+from flask_cors import cross_origin
+from flask_sqlalchemy import SQLAlchemy
+from itertools import groupby
 
 from customers import Customers
 from transaction_type import TransactionType
+from transaction_line_items import TransactionLineItems
 from transactions import Transactions
 
-
 import json
-
+import datetime
 
 engine = create_engine("postgresql+psycopg2://postgres:247050@localhost:5432/pythonTest")
 Session = sessionmaker(bind=engine)
@@ -23,19 +23,13 @@ session = Session()
 Base = declarative_base()
 
 app = Flask(__name__)
-CORS(app)
+db = SQLAlchemy(app)
+
 
 # @app.route('/', methods=['GET'])
 # def home():
 # return "<h1>Distant Reading Archive</h1><p>This site is a prototype API for distant reading of science fiction novels.</p>"
 # return render_template('')
-
-
-
-
-
-
-
 
 
 # CustomersAPI
@@ -81,29 +75,36 @@ def delete_customer(customer_id):
     return jsonify({'result': True})
 
 
+def object_as_dict(obj):
+    return {c.key: getattr(obj, c.key)
+            for c in inspect(obj).mapper.column_attrs}
+
+
+
+
+class Struct(object):
+    def __init__(self, **entries):
+        self.__dict__.update(entries)
+
 # TransactionsAPI
 @cross_origin()
 @app.route('/transactions', methods=['GET'])
 def get_transactions():
-    # transactions = session.query(Transactions, Customers, TransactionType).join(Customers).join(TransactionType).all()
-    # transactions = session.query(Transactions, Customers.first_name, Customers.last_name, TransactionType.name).join(Customers).join(TransactionType).all()
-
-    res = session.execute('SELECT transactions.*, c2.first_name, c2.last_name, tt.name AS transacion_type_name FROM transactions INNER JOIN customers c2 on transactions.customer_id = c2.id INNER JOIN transaction_type tt on transactions.type_code = tt.id ORDER BY timestamp')
-
-    # object = session.execute('SELECT transactions.*, c2.first_name, c2.last_name, tt.name AS transacion_type_name FROM transactions INNER JOIN customers c2 on transactions.customer_id = c2.id INNER JOIN transaction_type tt on transactions.type_code = tt.id ORDER BY timestamp').filter(Transactions.data['sequential_number'].astext=='required_key').all()
-
-    # res = session.execute(select([Transactions, Customers.first_name, Customers.last_name]))
-
-    return json.dumps([dict(r) for r in res], ensure_ascii=False, default=str)
-
-    # return json.dumps(res, cls=AlchemyEncoder)
+    transactionLineItems = session.query(Transactions, TransactionLineItems, Customers, TransactionType).join(
+        TransactionLineItems).join(Customers).join(TransactionType).all()
+    print(transactionLineItems[0][0].__dict__)
+    print(transactionLineItems[0][1].__dict__)
+    print(transactionLineItems[0][2].__dict__)
+    print(transactionLineItems[0][3].__dict__)
+    result = [[k, [x[1:] for x in g]] for k, g in groupby(transactionLineItems, key=lambda x: x[0])]
+    return json.dumps(result, cls=AlchemyEncoder)
 
 
 @cross_origin()
 @app.route('/transactions/<int:transaction_id>', methods=['GET'])
 def get_transaction(transaction_id):
-    transaction = session.query(Customers).filter_by(id=transaction_id).first()
-    if transaction is None:
+    transaction = session.query(Transactions).filter_by(id=transaction_id).all()
+    if not transaction:
         abort(404)
     return json.dumps(transaction, cls=AlchemyEncoder)
 
@@ -126,8 +127,8 @@ def create_transaction():
 @cross_origin()
 @app.route('/transactions/<int:transaction_id>', methods=['DELETE'])
 def delete_transaction(transaction_id):
-    transaction = session.query(Transactions).filter_by(id=transaction_id).first()
-    if transaction is None:
+    transaction = session.query(Transactions).filter_by(id=transaction_id).all()
+    if not transaction:
         abort(404)
     session.delete(transaction)
     session.commit()
@@ -140,4 +141,4 @@ def not_found(error, text='Not found'):
 
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(port=5002, debug=False)

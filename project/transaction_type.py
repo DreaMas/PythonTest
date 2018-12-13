@@ -5,7 +5,7 @@ Base = declarative_base()
 
 
 class TransactionType(Base):
-    __tablename__ = 'transaction_type'
+    __tablename__ = 'transaction_types'
 
     id = Column(Integer, primary_key=True, nullable=False)
     name = Column(String(60), nullable=False)
